@@ -1,0 +1,14 @@
+<section class="admin-users-new">
+
+  <header class="page-header">
+    <h1>User Login</h1>
+  </header>
+
+  <%= form_tag '/login' do %>
+
+    Email:<br><%= text_field_tag :email %><br>
+    Password:<br><%= password_field_tag :password %><br>
+    <%= submit_tag "Submit" %>
+
+  <% end %>
+</section>
