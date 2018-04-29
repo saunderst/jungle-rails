@@ -26,6 +26,19 @@
       </div>
     </div>
 
+    <div class="row">
+      <% if reviews = Review.where(product_id: @product.id) %>
+        <h4>Customer Reviews</h4>
+        <% reviews.each do |review| %>
+          <% user = User.find_by(id: review.user_id) %>
+          <dl class="dl-horizontal">
+            <dt><%= user.name %></dt>
+            <dd><%= review.description %></dd>
+            <dd>(<%= review.rating %>/5)</dd>
+          </dl>
+        <% end %>
+      <% end %>
+    </div>
   </article>
 
 </section>
