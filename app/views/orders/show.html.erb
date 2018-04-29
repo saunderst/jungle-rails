@@ -34,7 +34,10 @@
   </div>
 
   <div class="order-summary jumbotron">
-    <h4>A confirmation has been sent to <%= @order.email %> </h4>
+    <%UserMailer.confirmation_email(current_user.name, current_user.email, @order.id, number_to_currency(@order.total_cents.to_f / 100)).deliver_now%>
+            
+
+    <h4>A confirmation has been sent to <%= current_user.email %> </h4>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>

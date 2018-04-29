@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>This is confirming a Jungle order for <%= @name %></h1>
+    <p>
+      <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Item Total</th>
+        </tr>
+      </thead>
+      <% @item.each do |item| %>
+        <% product = Product.find_by(id: item.product_id) %>
+        <% item_total = product.price * item.quantity %>
+        <tbody>
+        <tr>
+          <td> <%= product.name %> </td>
+          <td> <%= item.quantity %> </td>
+          <td> <%= item_total %> </td>
+        </tr>
+        </tbody>
+        </table>
+      <% end %>
+    </p>
+    <hr>
+    <p>Your total for this order is <%=@total%>.</p>
+  </body>
+</html>
