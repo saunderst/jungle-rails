@@ -39,6 +39,22 @@
         <% end %>
       <% end %>
     </div>
+
+    <% @review = @product.reviews.build %>
+    <%= form_for [@product, @review] do |f| %>
+      <div>
+        <%= f.text_area :description %>
+        <%= f.select(:rating, options_for_select([
+          ['', nil],
+          ['Not My Cup of Tea', 1],
+          ['Could Be Into It', 2],
+          ['A Solid Choice', 3],
+          ['Kind of Amazing', 4],
+          ['My All-Time Fave', 5]
+        ])) %>
+      </div>
+      <%= f.submit %>
+    <% end %>
   </article>
 
 </section>
