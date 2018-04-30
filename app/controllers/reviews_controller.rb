@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :check_logged_in
+
   def create
     @product = Product.find params[:product_id]
     @review = @product.reviews.new(review_params)
@@ -15,5 +17,11 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:description, :rating)
+  end
+
+  def check_logged_in
+    unless current_user
+      redirect_to '/register'
+    end
   end
 end
