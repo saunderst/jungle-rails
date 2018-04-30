@@ -35,6 +35,9 @@
             <dt><%= user.name %></dt>
             <dd><%= review.description %></dd>
             <dd>(<%= review.rating %>/5)</dd>
+            <% if user.id == current_user.id %>
+              <dd><%= link_to fa_icon('trash'), product_review_path(@product.id, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></dd>
+            <% end %>
           </dl>
         <% end %>
       <% end %>
