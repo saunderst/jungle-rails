@@ -40,8 +40,7 @@
       <% end %>
     </div>
 
-    <% @review = @product.reviews.build %>
-    <%= form_for [@product, @review] do |f| %>
+    <%= form_for [@product, @new_review] do |f| %>
       <div>
         <%= f.text_area :description %>
         <%= f.select(:rating, options_for_select([
