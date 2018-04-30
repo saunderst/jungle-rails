@@ -27,7 +27,7 @@
     </div>
 
     <div class="row">
-      <% if reviews = Review.where(product_id: @product.id) %>
+      <% if reviews = Review.where(product_id: @product.id).order('id desc') %>
         <h4>Customer Reviews</h4>
         <% reviews.each do |review| %>
           <% user = User.find_by(id: review.user_id) %>
