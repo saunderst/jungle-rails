@@ -21,6 +21,13 @@ end
 
 # Let's do this ...
 
+## USERS
+
+puts "Creating Users ..."
+
+User.create! name: "Gomer", email: "gpyle@gmail.com", password_digest: "$2a$10$UrgXWZ07Lyf9WfoVUKfNEuvIE3XP4oUuCgZnfxF6d0oheoFRegD0S"
+User.create! name: "Thomas", email: "thomas_jungle@fastmail.com", password_digest: "$2a$10$NvCy8KOUg6olPr3Zaex7S.zNYxbftgoZelhAFS1kbM9jsvy1PzHIy"
+
 ## CATEGORIES
 
 puts "Finding or Creating Categories ..."
@@ -41,7 +48,18 @@ cat1.products.create!({
   image: open_asset('apparel1.jpg'),
   quantity: 0,
   price: 64.99
-})
+}).reviews.create!([
+  {
+    user_id: 2,
+    description: "It really is classy.  And it's a shirt, obviously, so...",
+    rating: 5
+  },
+  {
+    user_id: 1,
+    description: "I've seen classier.",
+    rating: 3
+  }
+])
 
 cat1.products.create!({
   name:  'Women\'s Zebra pants',
@@ -57,7 +75,7 @@ cat1.products.create!({
   image: open_asset('apparel3.jpg'),
   quantity: 4,
   price: 34.49
-})
+}).reviews.create!( { user_id: 2, description: "I got this home and realized that I looked like a dork.", rating: 1 })
 
 cat1.products.create!({
   name:  'Hipster Socks',

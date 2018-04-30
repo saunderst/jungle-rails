@@ -26,6 +26,39 @@
       </div>
     </div>
 
+    <div class="row">
+      <% if reviews = Review.where(product_id: @product.id).order('id desc') %>
+        <h4>Customer Reviews</h4>
+        <% reviews.each do |review| %>
+          <% user = User.find_by(id: review.user_id) %>
+          <dl class="dl-horizontal">
+            <dt><%= user.name %></dt>
+            <dd><%= review.description %></dd>
+            <dd>(<%= review.rating %>/5)</dd>
+            <% if user.id == current_user.id %>
+              <dd><%= link_to fa_icon('trash'), product_review_path(@product.id, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></dd>
+            <% end %>
+          </dl>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if current_user %>
+      <%= form_for [@product, @new_review] do |f| %>
+        <div>
+          <%= f.text_area :description %>
+          <%= f.select(:rating, options_for_select([
+            ['', nil],
+            ['Not My Cup of Tea', 1],
+            ['Could Be Into It', 2],
+            ['A Solid Choice', 3],
+            ['Kind of Amazing', 4],
+            ['My All-Time Fave', 5]
+          ])) %>
+        </div>
+        <%= f.submit %>
+      <% end %>
+    <% end %>
   </article>
 
 </section>
